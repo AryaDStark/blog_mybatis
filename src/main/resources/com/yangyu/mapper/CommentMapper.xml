@@ -3,16 +3,38 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yangyu.mapper.CommentMapper">
-    <select id="findByBlogId" parameterType="Long" resultType="Comment">
+
+    <resultMap type="com.yangyu.dto.CommentDto" id="commentMap">
+
+        <id property="id" column="id" />
+
+        <!-- 定义普通属性 -->
+        <result property="nickname" column="NICKNAME" />
+        <result property="email" column="EMAIL" />
+        <result property="content" column="CONTENT" />
+        <result property="avatar" column="AVATAR" />
+        <result property="blogId" column="BLOG_ID" />
+        <result property="adminComment" column="ADMINCOMMENT" />
+        <result property="parentCommentId" column="PARENT_COMMENT_ID" />
+
+
+    </resultMap>
+
+
+    <select id="findByBlogId" parameterType="Long" resultMap="commentMap">
         select * from t_comment where blog_id=#{id};
     </select>
     <select id="findById" resultType="Comment">
         select * from t_comment where id=#{id};
     </select>
+    <select id="findNoParentComment" parameterType="Long" resultType="Comment">
+        select * from t_comment where blog_id=#{id} and parent_comment_id=0;
+    </select>
+
 
     <insert id="save" parameterType="com.yangyu.po.Consumer" useGeneratedKeys="true" keyColumn="id">
-        insert into t_comment(admin_comment,avatar,content,email,nickname,blog_id)
-        values(#{adminComment},#{avatar},#{content},#{email},#{nickname},#{blog.id});
+        insert into t_comment(admin_comment,avatar,content,email,nickname,blog_id,parent_comment_id)
+        values(#{adminComment},#{avatar},#{content},#{email},#{nickname},#{blog.id},#{parentComment.id});
     </insert>
 
 

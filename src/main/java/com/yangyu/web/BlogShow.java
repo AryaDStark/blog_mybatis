@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-//import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -30,18 +29,19 @@ public class BlogShow {
     @GetMapping("/thisBlog/{id}")
     @ResponseBody
     public Result blogShow(@PathVariable Long id){
-      // .............. 每使用一次 views+1  并更新  ..........
+     //每进入一次这个接口 view+1
         Blog b= blogService.getById(id);
        Integer newView=b.getViews()+1;
         b.setViews(newView);
         blogService.update(b);
-      //  System.out.println(b.getViews()+1);
-     //''''''''''''''''''''''''''''''''''
         return Result.ok().data("thisBlog",b);
     }
 
 
-    // 根据  或title 或content 或 description 中 关键字 查找博客
+    /**
+     * 根据  或title 或content 或 description 中 关键字 查找博客
+     *
+     */
     @GetMapping("/search")
     @ResponseBody
     public  Result search(@PathVariable String keywords){
@@ -51,14 +51,18 @@ public class BlogShow {
     }
 
 
-    //***************   展示 评论   ******************
-    @GetMapping("/comment/{blogId}")
+    /**
+     * 展示评论
+     * */
+    @GetMapping("/comment")
     @ResponseBody
-    public Result commentShow(@PathVariable Long blogId){
-        return Result.ok().data("comments",commentService.findCommentsByBlogId(blogId));
+    public Result commentShow(Long blogId){
+        return Result.ok().data("comments",commentService.findNoParentComment(blogId));
     }
 
-    //************    写评论   ******************
+   /**
+    * 写评论
+    * */
     @GetMapping ("/say")
     @ResponseBody
     public  Result writeComment(@RequestParam String content,@RequestParam Long blogId,@RequestParam Long parentCommentId, HttpSession session){
@@ -71,7 +75,6 @@ public class BlogShow {
             e.printStackTrace();
             return Result.error().data("ss","ss");
         }
-//        User user =(User)session.getAttribute("user");
         Comment comment=new Comment();
         Blog blog=new Blog();
         blog.setId(blogId);
