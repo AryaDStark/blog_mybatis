@@ -59,13 +59,24 @@ public class BlogShow {
     }
 
     //************    写评论   ******************
-    @PostMapping("/say")
+    @GetMapping ("/say")
     @ResponseBody
-    public  Result writeComment(@RequestParam("content") String content,@RequestParam("blogId") Long blogId,@RequestParam("parentCommentId")Long parentCommentId, HttpSession session){
-        User user =(User)session.getAttribute("user");
+    public  Result writeComment(@RequestParam String content,@RequestParam Long blogId,@RequestParam Long parentCommentId, HttpSession session){
+        User user=null;
+        Consumer consumer=null;
+        try {
+             user =(User)session.getAttribute("user");
+             consumer=(Consumer)session.getAttribute("consumer");
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error().data("ss","ss");
+        }
+//        User user =(User)session.getAttribute("user");
         Comment comment=new Comment();
+        Blog blog=new Blog();
+        blog.setId(blogId);
         comment.setContent(content);
-        comment.setBlog(blogService.getById(blogId));
+        comment.setBlog(blog);
         comment.setParentComment(commentService.findById(parentCommentId));
         if (user!=null){
             comment.setAdminComment(true);
@@ -76,11 +87,18 @@ public class BlogShow {
             return Result.ok().data("message","管理员评论 来点档次");
         }
        else {
-           comment.setAdminComment(false);
-           comment.setNickname("游客");
-           comment.setAvatar(user.getAvatar());
-           comment.setEmail("游客@test.com");
-               return Result.ok().data("message","用户评论 整点花的");
+           if (consumer!=null) {
+               comment.setAdminComment(false);
+               comment.setNickname(consumer.getNickname());
+               comment.setAvatar(consumer.getAvatar());
+               comment.setEmail(consumer.getEmail());
+               return Result.ok().data("message", "用户评论 整点花的");
+           }
+           else {
+               comment.setAdminComment(false);
+               comment.setNickname("游客");
+               return Result.error().data("error","非注册用户评论");
+           }
            }
         }
     }

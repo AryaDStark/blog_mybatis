@@ -17,20 +17,20 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
+    //    @Autowired
+//     private HttpServletResponse response;
+    //    @Autowired
+//    private HttpServletRequest request;
+
     @Autowired
     ConsumerService consumerService;
 
     @Autowired
     UserService userService;
 
-    @Autowired
-    private HttpServletRequest request;
-
-//    @Autowired
-//     private HttpServletResponse response;
 
     // 登陆
-    @PostMapping("/login")
+    @GetMapping("/login")
     @ResponseBody
     public Result login(@RequestParam String username,@RequestParam String password,HttpSession session){
        //是否为管理员登陆
@@ -45,7 +45,7 @@ public class LoginController {
             //不是管理员  是否为普通用户
               Consumer consumer =  consumerService.checkConsumer(username,password);
               if (consumer!=null){
-                  session.setAttribute("普通用户",consumer);
+                  session.setAttribute("consumer",consumer);
 //                  Cookie cookie =new Cookie("username",username);
 //                  response .addCookie(cookie);
                   return Result.ok().data("ok",1).data("consumer",consumer);
