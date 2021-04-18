@@ -32,7 +32,7 @@
     </select>
 
 
-    <insert id="save" parameterType="com.yangyu.po.Consumer" useGeneratedKeys="true" keyColumn="id">
+    <insert id="save" parameterType="com.yangyu.po.Comment" useGeneratedKeys="true" keyColumn="id">
         insert into t_comment(admin_comment,avatar,content,email,nickname,blog_id,parent_comment_id)
         values(#{adminComment},#{avatar},#{content},#{email},#{nickname},#{blog.id},#{parentComment.id});
     </insert>

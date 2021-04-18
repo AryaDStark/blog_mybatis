@@ -29,16 +29,12 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> findNoParentComment(Long id){
-//        CommentUtil commentUtil=new CommentUtil();
-//        List<Comment> comments=commentUtil.find(id);
-
         List<Comment> comments=this.find(id);
         return comments;
     }
 
     @Override
     public void save(Comment comment) {
-
         commentMapper.save(comment);
     }
 

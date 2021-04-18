@@ -80,7 +80,12 @@ public class BlogShow {
         blog.setId(blogId);
         comment.setContent(content);
         comment.setBlog(blog);
-        comment.setParentComment(commentService.findById(parentCommentId));
+        if (parentCommentId==0){
+            Comment zero=new Comment();
+            zero.setId(blogId);
+            comment.setParentComment(zero);
+        }
+        if(parentCommentId!=0){comment.setParentComment(commentService.findById(parentCommentId));}
         if (user!=null){
             comment.setAdminComment(true);
             comment.setAvatar(user.getAvatar());
@@ -95,11 +100,13 @@ public class BlogShow {
                comment.setNickname(consumer.getNickname());
                comment.setAvatar(consumer.getAvatar());
                comment.setEmail(consumer.getEmail());
+               commentService.save(comment);
                return Result.ok().data("message", "用户评论 整点花的");
            }
            else {
                comment.setAdminComment(false);
                comment.setNickname("游客");
+               commentService.save(comment);
                return Result.error().data("error","非注册用户评论");
            }
            }
