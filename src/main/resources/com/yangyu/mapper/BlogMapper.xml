@@ -11,7 +11,7 @@
     </select>
     <insert id="save" parameterType="com.yangyu.po.Blog"  useGeneratedKeys="true" keyColumn="id">
         insert into t_blog (appreciation,commentabled,content,create_time,description,first_picture,flag,published,recommend,share_statement,title,update_time,type_id,user_id)
-        values (#{appreciation},#{commentabled},#{content},#{createTime},#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},#{updateTime},views=#{views},#{type.id},#{user.id});
+        values (#{appreciation},#{commentabled},#{content},now(),#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},#{updateTime},views=#{views},#{type.id},#{user.id});
     </insert>
     <delete id="delete" parameterType="Long" >
         delete from t_blog where id=#{id};
@@ -23,7 +23,7 @@
         update t_blog set appreciation=#{appreciation},commentabled=#{commentabled},content=#{content},
                           description=#{description},first_picture=#{firstPicture},flag=#{flag},
                           published=#{published},recommend=#{recommend},share_statement=#{shareStatement},title=#{title},
-                          update_time=#{updateTime},type_id=#{type.id},user_id=#{user.id} where id=#{id};
+                          update_time=now(),type_id=#{type.id},user_id=#{user.id} where id=#{id};
     </update>
 
 <!--    index *****************************************************************-->
