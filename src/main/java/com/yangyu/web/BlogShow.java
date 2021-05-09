@@ -98,7 +98,7 @@ public class BlogShow {
             return Result.ok().data("message","管理员评论 来点档次");
         }
        else {
-           if (consumer!=null) {
+           if(consumer!=null) {
                comment.setAdminComment(false);
                comment.setNickname(consumer.getNickname());
                comment.setAvatar(consumer.getAvatar());
@@ -108,13 +108,14 @@ public class BlogShow {
            }
            else {
                comment.setAdminComment(false);
+               comment.setAvatar("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F10%2F20170710021402_dn54m.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621343048&t=3e2c6f0006a0d132c351432581f1b838");
                comment.setNickname("游客");
                commentService.save(comment);
                return Result.error().data("error","非注册用户评论");
            }
-           }
-        }
+       }
     }
+}
 
 
 
