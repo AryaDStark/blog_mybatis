@@ -69,7 +69,7 @@ public class BlogShow {
         User user=null;
         Consumer consumer=null;
         try {
-             user =(User)session.getAttribute("user");
+             user =(User)session.getAttribute("adminUser");
              consumer=(Consumer)session.getAttribute("consumer");
         }catch (Exception e){
             e.printStackTrace();
@@ -91,6 +91,9 @@ public class BlogShow {
             comment.setAvatar(user.getAvatar());
             comment.setNickname(user.getNickname());
             comment.setEmail(user.getEmail());
+//            System.out.println(user.getAvatar());
+//            System.out.println(user.getNickname());
+//            System.out.println(user.getEmail());
             commentService.save(comment);
             return Result.ok().data("message","管理员评论 来点档次");
         }

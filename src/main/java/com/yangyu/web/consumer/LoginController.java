@@ -30,7 +30,7 @@ public class LoginController {
 
 
     // 登陆
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
     public Result login(@RequestParam String username,@RequestParam String password,HttpSession session){
        //是否为管理员登陆
