@@ -25,7 +25,9 @@ public class TypeController {
     //分页展示
     @GetMapping("/typeControl/{pageNum}")
     @ResponseBody
-    public Result showAllTypes(@PathVariable int pageNum,Long userId){
+    public Result showAllTypes(@PathVariable int pageNum,HttpSession session){
+        User user = (User)session.getAttribute("adminUser");
+        Long userId = user.getId();
         if(pageNum==-1){  pageNum=0;  }
         return Result.ok().data("types",typeService.findAllTypes(pageNum,userId));
     }

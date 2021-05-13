@@ -34,4 +34,6 @@ public interface BlogMapper {
     List<Blog>   findHotBlog();
 
     List<BlogDto>   findByKeywords(@Param("key") String keywords, @Param("userId")Long userId);
+
+    List<BlogDto>   findAllByKeywords(@Param("key") String keywords,@Param("pageNum")int pageNum);
 }

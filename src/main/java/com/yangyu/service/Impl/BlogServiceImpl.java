@@ -76,4 +76,9 @@ public class BlogServiceImpl implements BlogService {
     public List<BlogDto> findByKeywords(String keywords, Long userId) {
         return blogMapper.findByKeywords(keywords,userId);
     }
+
+    @Override
+    public List<BlogDto> findAllByKeywords(String keywords,int pageNum) {
+        return blogMapper.findAllByKeywords(keywords,(pageNum-1)*10);
+    }
 }

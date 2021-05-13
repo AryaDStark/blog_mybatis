@@ -1,5 +1,6 @@
 package com.yangyu.web.adminUser;
 
+import com.yangyu.dto.UserDto;
 import com.yangyu.po.User;
 import com.yangyu.service.UserService;
 import com.yangyu.util.Result;
@@ -46,13 +47,14 @@ public class LoginController {
     //普通用户注册
     @PostMapping("/register")
     @ResponseBody
-    public Result register(@RequestBody User user){
-        User userN = new User();
-        userN.setUsername(user.getUsername());
-        userN.setPassword(user.getPassword());
-        userN.setNickname(user.getNickname());
-        userN.setEmail(user.getEmail());
-        if(userService.addUser(userN)>0){
+    public Result register(@RequestBody UserDto userDto){
+        if (userService.getByUsername(userDto.getUsername())!=null){return Result.error().data("msg","用户名重复");}
+        User user = new User();
+        user.setUsername(userDto.getUsername());
+        user.setPassword(userDto.getPassword());
+        user.setNickname(userDto.getNickname());
+        user.setEmail(userDto.getEmail());
+        if(userService.addUser(user)>0){
             return Result.ok().data("msg","注册成功");
         }else{
             return Result.error().data("msg","注册失败");

@@ -27,7 +27,7 @@
 
     <sql id="sql">id,appreciation,commentabled,content,create_time,description,
                first_picture,flag,published,recommend,share_statement,title,update_time,
-               views,type_id</sql>
+               views,type_id,user_id</sql>
 
     <select id="findBlog"   resultType="Blog">
         select * from t_blog where user_id=#{userId} order by views DESC limit #{n1},#{n} ;
@@ -40,7 +40,7 @@
         delete from t_blog where id=#{id};
     </delete>
     <select id="getById" parameterType="Long" resultMap="blogMap">
-        select * from  t_blog where id=#{id};
+        select <include refid="sql"/> from  t_blog where id=#{id};
     </select>
     <update id="update" >
         update t_blog set appreciation=#{appreciation},commentabled=#{commentabled},content=#{content},
@@ -71,7 +71,9 @@
         select <include refid="sql"/> from t_blog where title like #{key} or content like #{key} or description like #{key} and user_id=#{userId};
     </select>
 
-
+    <select id="findAllByKeywords"  resultMap="blogMap">
+        select <include refid="sql"/> from t_blog where title like '%'#{key}'%' or  description like '%'#{key}'%' limit #{pageNum},10;
+    </select>
 
 
 </mapper>

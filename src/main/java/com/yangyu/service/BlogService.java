@@ -32,4 +32,6 @@ public interface BlogService {
 
    List<BlogDto>   findByKeywords(String keywords, Long userId);
 
+   List<BlogDto>   findAllByKeywords(String keywords,int pageNum);
+
 }

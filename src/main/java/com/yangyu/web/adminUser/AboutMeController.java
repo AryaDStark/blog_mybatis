@@ -1,5 +1,6 @@
 package com.yangyu.web.adminUser;
 
+import com.yangyu.dto.UserDto;
 import com.yangyu.po.User;
 import com.yangyu.service.UserService;
 import com.yangyu.util.Result;
@@ -24,13 +25,15 @@ public class AboutMeController {
     }
 
     @PostMapping("/changeMe")
-    public Result changeMe(@RequestBody User user){
+    public Result changeMe(@RequestBody UserDto userDto,HttpSession session){
+        User user = (User)session.getAttribute("adminUser");
+        Long userId = user.getId();
         User userN = new User();
-        userN.setUsername(user.getUsername());
-        userN.setPassword(user.getPassword());
-        userN.setEmail(user.getEmail());
-        userN.setNickname(user.getNickname());
-        userN.setAvatar(user.getAvatar());
+        userN.setId(userId);
+        userN.setPassword(userDto.getPassword());
+        userN.setEmail(userDto.getEmail());
+        userN.setNickname(userDto.getNickname());
+        userN.setAvatar(userDto.getAvatar());
         if (userService.updateUser(userN)>0){
             return Result.ok().data("ok","ok");
         }else {

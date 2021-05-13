@@ -30,13 +30,14 @@ public class BlogShow {
     TagService tagService;
     @Autowired
     BlogTagService blogTagService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/thisBlog/{id}")
     @ResponseBody
     public Result blogShow(@PathVariable Long id){
      //每进入一次这个接口 view+1
         BlogDto blogDto= blogService.getById(id);
-        System.out.println(blogDto.getTypeId());
         Blog blog = new Blog();
         blog.setId(blogDto.getId());
         blog.setTitle(blogDto.getTitle());
@@ -55,8 +56,9 @@ public class BlogShow {
         blog.setType(typeService.getById(blogDto.getTypeId()));
         blog.setTagIds(blogTagService.findTagByBlog(blogDto.getId())+"");
         blog.setTags(blogTagService.findTagByBlog(blogDto.getId()));
+        blog.setUser(userService.getById(blogDto.getUserId()));
         blogService.update(blog);
-        return Result.ok().data("thisBlog",blog);
+        return Result.ok().data("thisBlog",blog).data("blogerName",userService.getById(blogDto.getUserId()).getNickname()).data("blogerId",blogDto.getUserId());
     }
 
 

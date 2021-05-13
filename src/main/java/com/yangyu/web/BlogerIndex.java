@@ -3,29 +3,24 @@ package com.yangyu.web;
 
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.yangyu.po.Blog;
-import com.yangyu.po.Type;
+
 import com.yangyu.service.BlogService;
 import com.yangyu.service.TagService;
 import com.yangyu.service.TypeService;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @Controller
-public class IndexController {
+public class BlogerIndex {
 
     @Autowired
     ObjectMapper objectMapper;
-
     @Autowired
     BlogService blogService;
     @Autowired

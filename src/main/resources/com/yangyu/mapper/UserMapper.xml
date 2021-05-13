@@ -8,6 +8,14 @@
         select * from t_user where id=#{id};
     </select>
 
+    <select id="getByUsername" resultType="User">
+        select * from t_user where username=#{username};
+    </select>
+
+    <select id="getByName" resultType="User">
+        select id,nickname,avatar from t_user where nickname like '%'#{keywords}'%';
+    </select>
+
     <select id="checkUser"  resultType="User">
         select * from t_user where password=#{p} and username=#{u};
     </select>
@@ -17,7 +25,7 @@
     </insert>
 
     <update id="updateUser">
-        update t_user set password=#{password},email=#{email},nickname=#{nickName}
+        update t_user set password=#{password},email=#{email},nickname=#{nickname}
           ,avatar=#{avatar},update_time=now() where id=#{id};
     </update>
 </mapper>
