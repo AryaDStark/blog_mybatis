@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Mapper
 public interface UserMapper {
+    User getById(Long id);
+
+    int addUser(User user);
 
     User checkUser(@Param("u") String username,@Param("p") String password);
+
+    int updateUser(User user);
 }

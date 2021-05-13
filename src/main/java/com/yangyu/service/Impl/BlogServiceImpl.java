@@ -26,8 +26,6 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void save(Blog blog) {
-        blog.setCreateTime(new Date());
-        blog.setUpdateTime(new Date());
         blogMapper.save(blog);
     }
 
@@ -46,6 +44,11 @@ public class BlogServiceImpl implements BlogService {
     public void update(Blog blog) {
         blog.setUpdateTime(new Date());
         blogMapper.update(blog);
+    }
+
+    @Override
+    public int deleteType(Long typeId) {
+        return blogMapper.updateType(typeId);
     }
 
     @Override

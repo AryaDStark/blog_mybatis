@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangyu.mapper.BlogTagMapper">
+
+    <insert id="addBlogTag">
+        insert into t_blog_tags (blogs_id,tags_id) values (#{blogId},#{tagId});
+    </insert>
+
+    <update id="updateTag">
+        delete from t_blog_tags where tags_id=#{tagsId};
+    </update>
+
+    <delete id="deleteBlogTag">
+       delete from t_blog_tags where blogs_id=#{id};
+    </delete>
+</mapper>

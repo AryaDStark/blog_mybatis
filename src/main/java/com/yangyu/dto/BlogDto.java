@@ -1,81 +1,36 @@
-package com.yangyu.po;
+package com.yangyu.dto;
 
-//import javax.persistence.*;
+import com.yangyu.po.Comment;
+import com.yangyu.po.Tag;
+import com.yangyu.po.Type;
+import com.yangyu.po.User;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//博客
-//@Entity
-//@Table(name = "t_blog")
-public class Blog {
-    //id
+/**
+ * @author Arya
+ */
+public class BlogDto {
     private Long id;
-    //标题
     private String title;
-    //内容
-
     private String content;
-    //首页展示内容
-
     private String description;
-    //首图
     private String firstPicture;
-    //标记
     private String flag;
-    //浏览次数
     private Integer views;
-    //赞赏开启
     private boolean appreciation;
-    //版权开启
     private  boolean shareStatement;
-    //评论开启
     private  boolean commentabled;
-    //发布
     private boolean published;
-    //是否推荐
     private boolean recommend;
-    //创建时间
-
     private Date createTime;
-    //更新时间
-
     private Date updateTime;
-    //分类
-
-    private Type type;
-    //标签
-
-    private List<Tag> tags = new ArrayList<>();
-    //用户
-
-    private User user;
-    //留言
-
+    private Long typeId;
+    private List<Long> tagIds;
+    private Long userId;
     private List<Comment> comments = new ArrayList<>();
-
-
-    private String tagIds;
-
-    public Blog() {
-
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTagIds() {
-        return tagIds;
-    }
-
-    public void setTagIds(String tagIds) {
-        this.tagIds = tagIds;
-    }
 
     public Long getId() {
         return id;
@@ -99,6 +54,14 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getFirstPicture() {
@@ -181,28 +144,28 @@ public class Blog {
         this.updateTime = updateTime;
     }
 
-    public Type getType() {
-        return type;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public List<Long> getTagIds() {
+        return tagIds;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setTagIds(List<Long> tagIds) {
+        this.tagIds = tagIds;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public List<Comment> getComments() {
@@ -212,52 +175,4 @@ public class Blog {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-
-    public void init(){
-        this.tagIds = tagsToIds(this.getTags());
-    }
-
-    @Override
-    public String toString() {
-        return "Blog{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", description='" + description + '\'' +
-                ", firstPicture='" + firstPicture + '\'' +
-                ", flag='" + flag + '\'' +
-                ", views=" + views +
-                ", appreciation=" + appreciation +
-                ", shareStatement=" + shareStatement +
-                ", commentabled=" + commentabled +
-                ", published=" + published +
-                ", recommend=" + recommend +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", type=" + type +
-                ", tags=" + tags +
-                ", user=" + user +
-                ", comments=" + comments +
-                ", tagIds='" + tagIds + '\'' +
-                '}';
-    }
-
-    private String tagsToIds(List<Tag> tags){
-        if (!tags.isEmpty()){
-            StringBuffer ids = new StringBuffer();
-            boolean flag = false;
-            for (Tag tag : tags){
-                if (flag){
-                    ids.append(",");
-                }else {
-                    flag = true;
-                }
-                ids.append(tag.getId());
-            }
-            return ids.toString();
-        }else {
-            return tagIds;
-        }
-    }
-
 }

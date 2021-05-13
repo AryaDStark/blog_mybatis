@@ -1,7 +1,9 @@
 package com.yangyu.web.adminUser;
 
+import com.yangyu.mapper.BlogTagMapper;
 import com.yangyu.po.Tag;
 import com.yangyu.po.Type;
+import com.yangyu.service.BlogTagService;
 import com.yangyu.service.TagService;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TagController {
     @Autowired
     TagService tagService;
+    @Autowired
+    BlogTagService blogTagService;
 
     @GetMapping("/tagControl/{pageNum}")
     @ResponseBody
@@ -25,9 +29,9 @@ public class TagController {
     }
 
     //增加
-    @GetMapping("/addTag/{name}")
+    @GetMapping("/addTag")
     @ResponseBody
-    public Result addTag(@PathVariable String name){
+    public Result addTag(String name){
         tagService.saveTag(name);
         return  Result.ok().data("message","成功");
     }
@@ -36,6 +40,7 @@ public class TagController {
     @GetMapping("/deleteTag/{id}")
     @ResponseBody
     public Result deleteTag(@PathVariable long id){
+        blogTagService.updateTag(id);
         tagService.deleteTag(id);
         return  Result.ok().data("message","成功");
     }
@@ -49,9 +54,9 @@ public class TagController {
 
 
     //提交修改后的 tag
-    @GetMapping("/updateTag/{tag}")
+    @GetMapping("/updateTag")
     @ResponseBody
-    public Result updateTag(@PathVariable Tag tag){
+    public Result updateTag(Tag tag){
         if (tagService.getByName(tag.getName())==null){
             tagService.updateTag(tag);
             return Result.ok().data("message","over");

@@ -10,8 +10,8 @@
         select * from t_blog order by views DESC limit #{n1},#{n} ;
     </select>
     <insert id="save" parameterType="com.yangyu.po.Blog"  useGeneratedKeys="true" keyColumn="id">
-        insert into t_blog (appreciation,commentabled,content,create_time,description,first_picture,flag,published,recommend,share_statement,title,update_time,type_id,user_id)
-        values (#{appreciation},#{commentabled},#{content},now(),#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},#{updateTime},views=#{views},#{type.id},#{user.id});
+        insert into t_blog (appreciation,commentabled,content,create_time,description,first_picture,flag,published,recommend,share_statement,title,type_id,user_id)
+        values (#{appreciation},#{commentabled},#{content},now(),#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},views=#{views},#{type.id},#{user.id});
     </insert>
     <delete id="delete" parameterType="Long" >
         delete from t_blog where id=#{id};
@@ -24,6 +24,9 @@
                           description=#{description},first_picture=#{firstPicture},flag=#{flag},
                           published=#{published},recommend=#{recommend},share_statement=#{shareStatement},title=#{title},
                           update_time=now(),type_id=#{type.id},user_id=#{user.id} where id=#{id};
+    </update>
+    <update id="updateType">
+        update t_blog set type_id=1 where type_id=#{typeId};
     </update>
 
 <!--    index *****************************************************************-->
@@ -42,7 +45,7 @@
         select * from t_blog order by views DESC limit 0,6;
     </select>
     <select id="findByKeywords" parameterType="String" resultType="Blog">
-        select * from t_blog where title=#{key} or content=#{key} or description=#{key};
+        select * from t_blog where title like '%'#{key}'%' or content like '%'#{key}'%' or description like '%'#{key}'%';
     </select>
 
 

@@ -2,7 +2,6 @@ package com.yangyu.web;
 
 import com.yangyu.po.Blog;
 import com.yangyu.po.Comment;
-import com.yangyu.po.Consumer;
 import com.yangyu.po.User;
 import com.yangyu.service.BlogService;
 import com.yangyu.service.CommentService;
@@ -83,6 +82,7 @@ public class BlogShow {
         if (parentCommentId==0){
             Comment zero=new Comment();
             zero.setId(blogId);
+            zero.setId(0L);
             comment.setParentComment(zero);
         }
         if(parentCommentId!=0){comment.setParentComment(commentService.findById(parentCommentId));}
@@ -91,9 +91,6 @@ public class BlogShow {
             comment.setAvatar(user.getAvatar());
             comment.setNickname(user.getNickname());
             comment.setEmail(user.getEmail());
-//            System.out.println(user.getAvatar());
-//            System.out.println(user.getNickname());
-//            System.out.println(user.getEmail());
             commentService.save(comment);
             return Result.ok().data("message","管理员评论 来点档次");
         }
@@ -108,7 +105,7 @@ public class BlogShow {
            }
            else {
                comment.setAdminComment(false);
-               comment.setAvatar("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F10%2F20170710021402_dn54m.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621343048&t=3e2c6f0006a0d132c351432581f1b838");
+               comment.setAvatar("");
                comment.setNickname("游客");
                commentService.save(comment);
                return Result.error().data("error","非注册用户评论");

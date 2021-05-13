@@ -14,13 +14,15 @@ public interface BlogMapper {
 
     List<Blog> findBlog(@Param("n1") Integer n1,@Param("n")int num );
 
-    void       save(Blog blog);
+    void save(Blog blog);
 
-    void        delete(@Param("id")Long id);
+    void delete(@Param("id")Long id);
 
-    Blog        getById(@Param("id")Long id);
+    Blog getById(@Param("id")Long id);
 
-    void        update(Blog blog);
+    void update(Blog blog);
+
+    int updateType(Long typeId);
 
     List<Blog>  findBlogByType(@Param("id") Long id);
 

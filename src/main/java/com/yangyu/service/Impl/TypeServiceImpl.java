@@ -43,9 +43,6 @@ public class TypeServiceImpl implements TypeService {
     public Type getByName(String name) {
         return typeMapper.getByName(name);
     }
-/**
- * 处理接收的数据
- */
 
     @Override
     public void updateType(Type type) {

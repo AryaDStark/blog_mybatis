@@ -11,13 +11,15 @@ public interface BlogService {
 
    List<Blog> findBlog(int pageNumber,int num);
 
-   void        save(Blog blog);
+   void save(Blog blog);
 
-   void         delete(Long id);
+   void delete(Long id);
 
-   Blog       getById(Long id);
+   Blog getById(Long id);
 
-   void       update(Blog blog);
+   void update(Blog blog);
+
+   int deleteType(Long typeId);
 
    List<Blog>  findBlogByType(Long id);
 

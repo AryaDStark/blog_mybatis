@@ -2,6 +2,7 @@ package com.yangyu.web.adminUser;
 
 import com.mysql.cj.util.DnsSrv;
 import com.yangyu.po.Type;
+import com.yangyu.service.BlogService;
 import com.yangyu.service.TypeService;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/admin")
 public class TypeController {
 
-
     @Autowired
     TypeService typeService;
+    @Autowired
+    BlogService blogService;
 
     //分页展示
     @GetMapping("/typeControl/{pageNum}")
@@ -29,9 +31,9 @@ public class TypeController {
     }
 
     //增加
-    @GetMapping("/addType/{name}")
+    @GetMapping("/addType")
     @ResponseBody
-    public Result addType(@PathVariable String name){
+    public Result addType(String name){
         typeService.saveType(name);
         return  Result.ok().data("message","成功");
     }
@@ -40,6 +42,7 @@ public class TypeController {
     @GetMapping("/deleteType/{id}")
     @ResponseBody
     public Result deleteType(@PathVariable Long id){
+        blogService.deleteType(id);
         typeService.deleteType(id);
         return  Result.ok().data("message","成功");
     }
@@ -50,16 +53,12 @@ public class TypeController {
     public Result showThisType(@PathVariable Long id){
         return  Result.ok().data("type",typeService.getById(id));
     }
-/*
-*
-*  处理接收的数据
-*
-* */
+
 
     //提交修改后的 type
-    @GetMapping("/updateType/{type}")
+    @GetMapping("/updateType")
     @ResponseBody
-    public Result updateType(@PathVariable Type type){
+    public Result updateType(Type type){
          if (typeService.getByName(type.getName())==null){
              typeService.updateType(type);
              return Result.ok().data("message","over");

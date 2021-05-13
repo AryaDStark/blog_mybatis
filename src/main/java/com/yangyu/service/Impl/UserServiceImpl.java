@@ -12,7 +12,22 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
+    public User getById(Long id) {
+        return userMapper.getById(id);
+    }
+
+    @Override
+    public int addUser(User user) {
+        return userMapper.addUser(user);
+    }
+
+    @Override
     public User checkUser(String username, String password) {
         return userMapper.checkUser(username,password);
+    }
+
+    @Override
+    public int updateUser(User user) {
+        return userMapper.updateUser(user);
     }
 }
