@@ -20,4 +20,4 @@
         update t_user set password=#{password},email=#{email},nickname=#{nickName}
           ,avatar=#{avatar},update_time=now() where id=#{id};
     </update>
-</mapper>
+</mapper>+
