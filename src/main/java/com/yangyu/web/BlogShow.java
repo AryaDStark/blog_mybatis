@@ -66,10 +66,8 @@ public class BlogShow {
     @ResponseBody
     public  Result writeComment(@RequestParam String content,@RequestParam Long blogId,@RequestParam Long parentCommentId, HttpSession session){
         User user=null;
-        Consumer consumer=null;
         try {
              user =(User)session.getAttribute("adminUser");
-             consumer=(Consumer)session.getAttribute("consumer");
         }catch (Exception e){
             e.printStackTrace();
             return Result.error().data("ss","ss");
@@ -95,21 +93,11 @@ public class BlogShow {
             return Result.ok().data("message","管理员评论 来点档次");
         }
        else {
-           if(consumer!=null) {
-               comment.setAdminComment(false);
-               comment.setNickname(consumer.getNickname());
-               comment.setAvatar(consumer.getAvatar());
-               comment.setEmail(consumer.getEmail());
-               commentService.save(comment);
-               return Result.ok().data("message", "用户评论 整点花的");
-           }
-           else {
                comment.setAdminComment(false);
                comment.setAvatar("");
                comment.setNickname("游客");
                commentService.save(comment);
                return Result.error().data("error","非注册用户评论");
-           }
        }
     }
 }
