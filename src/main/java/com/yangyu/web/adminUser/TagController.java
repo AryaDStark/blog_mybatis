@@ -59,10 +59,8 @@ public class TagController {
     @GetMapping("/updateTag")
     @ResponseBody
     public Result updateTag(@RequestBody Tag tag, HttpSession session){
-//        User user = (User)session.getAttribute("adminUser");
-//        Long userId = user.getId();
-        Long userId = 1L;
-        System.out.println(tag.toString());
+        User user = (User)session.getAttribute("adminUser");
+        Long userId = user.getId();
         if (tagService.getByName(tag.getName(),userId)==null){
             tagService.updateTag(tag);
             return Result.ok().data("message","over");
