@@ -14,11 +14,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    //    @Autowired
-//     private HttpServletResponse response;
-    //    @Autowired
-//    private HttpServletRequest request;
-
     @Autowired
     ConsumerService consumerService;
 
@@ -34,8 +29,6 @@ public class LoginController {
         User user = userService.checkUser(username,password);
         if (user!=null){
             session.setAttribute("adminUser",user);
-//            Cookie cookie =new Cookie("adminUsername",username);
-//               response .addCookie(cookie);
             return Result.ok().data("ok",0).data("管理员对象信息",user);
         }
         else {
@@ -43,8 +36,6 @@ public class LoginController {
               Consumer consumer =  consumerService.checkConsumer(username,password);
               if (consumer!=null){
                   session.setAttribute("consumer",consumer);
-//                  Cookie cookie =new Cookie("username",username);
-//                  response .addCookie(cookie);
                   return Result.ok().data("ok",1).data("consumer",consumer);
               }
               else {
