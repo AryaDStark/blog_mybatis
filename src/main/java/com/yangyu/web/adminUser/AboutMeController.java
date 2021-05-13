@@ -4,10 +4,7 @@ import com.yangyu.po.User;
 import com.yangyu.service.UserService;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +24,7 @@ public class AboutMeController {
     }
 
     @PostMapping("/changeMe")
-    public Result changeMe(User user){
+    public Result changeMe(@RequestBody User user){
         User userN = new User();
         userN.setUsername(user.getUsername());
         userN.setPassword(user.getPassword());

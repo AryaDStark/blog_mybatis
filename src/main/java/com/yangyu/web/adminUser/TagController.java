@@ -3,15 +3,15 @@ package com.yangyu.web.adminUser;
 import com.yangyu.mapper.BlogTagMapper;
 import com.yangyu.po.Tag;
 import com.yangyu.po.Type;
+import com.yangyu.po.User;
 import com.yangyu.service.BlogTagService;
 import com.yangyu.service.TagService;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,18 +21,20 @@ public class TagController {
     @Autowired
     BlogTagService blogTagService;
 
-    @GetMapping("/tagControl/{pageNum}")
+    @GetMapping("/tagControl")
     @ResponseBody
-    public Result showAllTags(@PathVariable int pageNum){
+    public Result showAllTags(int pageNum,Long userId){
         if (pageNum==-1){pageNum=0;}
-        return Result.ok().data("tags",tagService.findAllTags(pageNum));
+        return Result.ok().data("tags",tagService.findAllTags(pageNum,userId));
     }
 
     //增加
     @GetMapping("/addTag")
     @ResponseBody
-    public Result addTag(String name){
-        tagService.saveTag(name);
+    public Result addTag(String name, HttpSession session){
+        User user = (User)session.getAttribute("adminUser");
+        Long userId = user.getId();
+        tagService.saveTag(name,userId);
         return  Result.ok().data("message","成功");
     }
 
@@ -56,8 +58,12 @@ public class TagController {
     //提交修改后的 tag
     @GetMapping("/updateTag")
     @ResponseBody
-    public Result updateTag(Tag tag){
-        if (tagService.getByName(tag.getName())==null){
+    public Result updateTag(@RequestBody Tag tag, HttpSession session){
+//        User user = (User)session.getAttribute("adminUser");
+//        Long userId = user.getId();
+        Long userId = 1L;
+        System.out.println(tag.toString());
+        if (tagService.getByName(tag.getName(),userId)==null){
             tagService.updateTag(tag);
             return Result.ok().data("message","over");
         }

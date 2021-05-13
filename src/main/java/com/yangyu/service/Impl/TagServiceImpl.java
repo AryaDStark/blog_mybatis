@@ -15,19 +15,19 @@ public class TagServiceImpl implements TagService {
     TagMapper tagMapper;
 
     @Override
-    public List<Tag> findTopTags() {
-        return tagMapper.findTopTags();
+    public List<Tag> findTopTags(Long userId) {
+        return tagMapper.findTopTags(userId);
     }
 
     @Override
-    public List<Tag> findAllTags(int pageNum) {
+    public List<Tag> findAllTags(int pageNum,Long userId) {
         int n1=pageNum*3+1;
-        return tagMapper.findAllTags(n1);
+        return tagMapper.findAllTags(n1,userId);
     }
 
     @Override
-    public void saveTag(String name) {
-        tagMapper.saveTag(name);
+    public void saveTag(String name,Long userId) {
+        tagMapper.saveTag(name,userId);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag getByName(String name) {
-        return tagMapper.getByName(name);
+    public Tag getByName(String name,Long userId) {
+        return tagMapper.getByName(name,userId);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.yangyu.service;
 
 
+import com.yangyu.dto.BlogDto;
 import com.yangyu.po.Blog;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,13 +10,13 @@ import java.util.List;
 
 public interface BlogService {
 
-   List<Blog> findBlog(int pageNumber,int num);
+   List<Blog> findBlog(int pageNumber,int num,Long blogId);
 
    void save(Blog blog);
 
    void delete(Long id);
 
-   Blog getById(Long id);
+   BlogDto getById(Long id);
 
    void update(Blog blog);
 
@@ -25,10 +26,10 @@ public interface BlogService {
 
    List<Blog>  findBlogByTag(Long id);
 
-   Integer         count();
+   Integer count(Long userId);
 
     List<Blog>           findHotBlog();
 
-   List<Blog>   findByKeywords(String keywords);
+   List<BlogDto>   findByKeywords(String keywords, Long userId);
 
 }

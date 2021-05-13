@@ -21,8 +21,8 @@ public class TagShow {
 
     @GetMapping("/allTags")
     @ResponseBody
-    public Result tag(){
-        return Result.ok().data("tags",tagService.findTopTags());
+    public Result tag(Long userId){
+        return Result.ok().data("tags",tagService.findTopTags(userId));
     }
 
     //根据 tag 展示 博客

@@ -14,19 +14,19 @@ public class TypeServiceImpl implements TypeService {
     TypeMapper typeMapper;
 
     @Override
-    public List<Type> findTopTypes() {
-        return typeMapper.findTopTypes();
+    public List<Type> findTopTypes(Long userId) {
+        return typeMapper.findTopTypes(userId);
     }
 
     @Override
-    public List<Type> findAllTypes(int pageNum) {
+    public List<Type> findAllTypes(int pageNum,Long userId) {
         int n1=pageNum*3+1;
-        return typeMapper.findAllTypes(n1);
+        return typeMapper.findAllTypes(n1,userId);
     }
 
     @Override
-    public void saveType(String name) {
-        typeMapper.saveType(name);
+    public void saveType(String name,Long userId) {
+        typeMapper.saveType(name,userId);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public Type getByName(String name) {
-        return typeMapper.getByName(name);
+    public Type getByName(String name,Long userId) {
+        return typeMapper.getByName(name,userId);
     }
 
     @Override

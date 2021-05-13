@@ -2,6 +2,7 @@ package com.yangyu.service.Impl;
 
 
 
+import com.yangyu.dto.BlogDto;
 import com.yangyu.mapper.BlogMapper;
 
 import com.yangyu.po.Blog;
@@ -18,9 +19,9 @@ public class BlogServiceImpl implements BlogService {
     BlogMapper blogMapper;
 
     @Override
-    public List<Blog> findBlog(int pageNumber,int num) {
+    public List<Blog> findBlog(int pageNumber,int num,Long userId) {
         int n1=pageNumber*num;
-        return blogMapper.findBlog(n1,num);
+        return blogMapper.findBlog(n1,num,userId);
     }
 
 
@@ -36,7 +37,7 @@ public class BlogServiceImpl implements BlogService {
 
 
     @Override
-    public Blog getById(Long id) {
+    public BlogDto getById(Long id) {
         return blogMapper.getById(id);
     }
 
@@ -62,8 +63,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Integer count() {
-        return blogMapper.count();
+    public Integer count(Long userId){
+        return blogMapper.count(userId);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> findByKeywords(String keywords) {
-        return blogMapper.findByKeywords(keywords);
+    public List<BlogDto> findByKeywords(String keywords, Long userId) {
+        return blogMapper.findByKeywords(keywords,userId);
     }
 }

@@ -10,11 +10,11 @@ import java.util.List;
 @Component
 public interface TagMapper {
 
-    List<Tag> findAllTags(@Param("n")Integer pageNum);
-    List<Tag> findTopTags();
-    void      saveTag(@Param("name")String name);
+    List<Tag> findAllTags(@Param("n")Integer pageNum,@Param("userId")Long userId);
+    List<Tag> findTopTags(Long userId);
+    void      saveTag(@Param("name")String name,@Param("userId")Long userId);
     void      deleteTag(@Param("id")Long id);
     Tag       getById(@Param("id")Long id);
-    Tag       getByName(@Param("name")String name);
+    Tag       getByName(@Param("name")String name,@Param("userId")Long userId);
     void      updateTag(Tag tag);
 }

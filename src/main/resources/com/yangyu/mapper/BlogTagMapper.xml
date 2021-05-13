@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yangyu.mapper.BlogTagMapper">
 
+    <select id="findByBlogId" resultType="Tag">
+        select t.id,t.name from t_blog_tags tbt left join t_tag t on tbt.tags_id=t.id  where tbt.blogs_id=#{blogId};
+    </select>
+
     <insert id="addBlogTag">
         insert into t_blog_tags (blogs_id,tags_id) values (#{blogId},#{tagId});
     </insert>

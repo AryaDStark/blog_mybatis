@@ -19,8 +19,8 @@ public class TypeShow {
 
     @GetMapping("/allTypes")
     @ResponseBody
-    public Result type(){
-        return Result.ok().data("types",typeService.findTopTypes());
+    public Result type(Long userId){
+        return Result.ok().data("types",typeService.findTopTypes(userId));
     }
 
 

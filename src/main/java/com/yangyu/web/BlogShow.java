@@ -1,16 +1,17 @@
 package com.yangyu.web;
 
+import com.yangyu.dto.BlogDto;
 import com.yangyu.po.Blog;
 import com.yangyu.po.Comment;
 import com.yangyu.po.User;
-import com.yangyu.service.BlogService;
-import com.yangyu.service.CommentService;
+import com.yangyu.service.*;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,31 +22,74 @@ public class BlogShow {
 
     @Autowired
     BlogService blogService;
-
     @Autowired
     CommentService commentService;
+    @Autowired
+    TypeService typeService;
+    @Autowired
+    TagService tagService;
+    @Autowired
+    BlogTagService blogTagService;
 
     @GetMapping("/thisBlog/{id}")
     @ResponseBody
     public Result blogShow(@PathVariable Long id){
      //每进入一次这个接口 view+1
-        Blog b= blogService.getById(id);
-       Integer newView=b.getViews()+1;
-        b.setViews(newView);
-        blogService.update(b);
-        return Result.ok().data("thisBlog",b);
+        BlogDto blogDto= blogService.getById(id);
+        System.out.println(blogDto.getTypeId());
+        Blog blog = new Blog();
+        blog.setId(blogDto.getId());
+        blog.setTitle(blogDto.getTitle());
+        blog.setContent(blogDto.getContent());
+        blog.setDescription(blogDto.getDescription());
+        blog.setFirstPicture(blogDto.getFirstPicture());
+        blog.setFlag(blogDto.getFlag());
+        blog.setViews(blogDto.getViews()+1);
+        blog.setAppreciation(blogDto.isAppreciation());
+        blog.setShareStatement(blogDto.isShareStatement());
+        blog.setCommentabled(blogDto.isCommentabled());
+        blog.setPublished(blogDto.isPublished());
+        blog.setRecommend(blogDto.isRecommend());
+        blog.setCreateTime(blogDto.getCreateTime());
+        blog.setUpdateTime(blogDto.getUpdateTime());
+        blog.setType(typeService.getById(blogDto.getTypeId()));
+        blog.setTagIds(blogTagService.findTagByBlog(blogDto.getId())+"");
+        blog.setTags(blogTagService.findTagByBlog(blogDto.getId()));
+        blogService.update(blog);
+        return Result.ok().data("thisBlog",blog);
     }
 
 
     /**
-     * 根据  或title 或content 或 description 中 关键字 查找博客
+     * 根据或title 或content 或 description 中 关键字 查找博客
      *
      */
     @GetMapping("/search")
     @ResponseBody
-    public  Result search(@PathVariable String keywords){
-        List<Blog> blogs=blogService.findByKeywords("%"+keywords+"%");
-        if (null!=blogs){  return Result.ok().data("blogsFoundByKeywords",blogs) ; }
+    public  Result search(@RequestParam("keywords")String keywords,@RequestParam("userId")Long userId){
+        List<BlogDto> blogDtos=blogService.findByKeywords("%"+keywords+"%",userId);
+        Blog blog = new Blog();
+        List<Blog> blogs = new ArrayList<>();
+        for (BlogDto blogDto:blogDtos){
+            blog.setId(blogDto.getId());
+            blog.setTitle(blogDto.getTitle());
+            blog.setContent(blogDto.getContent());
+            blog.setDescription(blogDto.getDescription());
+            blog.setFirstPicture(blogDto.getFirstPicture());
+            blog.setFlag(blogDto.getFlag());
+            blog.setViews(blogDto.getViews());
+            blog.setAppreciation(blogDto.isAppreciation());
+            blog.setShareStatement(blogDto.isShareStatement());
+            blog.setCommentabled(blogDto.isCommentabled());
+            blog.setPublished(blogDto.isPublished());
+            blog.setRecommend(blogDto.isRecommend());
+            blog.setCreateTime(blogDto.getCreateTime());
+            blog.setUpdateTime(blogDto.getUpdateTime());
+            blog.setType(typeService.getById(blogDto.getTypeId()));
+            blog.setTagIds(blogTagService.findTagByBlog(blogDto.getId())+"");
+            blogs.add(blog);
+        }
+        if (null!=blogs){  return Result.ok().data("blogsFoundByKeywords",blogs);}
         else {return Result.error().data("noBlogsFound","noBlogsFound");}
     }
 

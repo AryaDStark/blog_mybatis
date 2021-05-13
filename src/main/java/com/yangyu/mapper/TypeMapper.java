@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper
 public interface TypeMapper {
 
-    List<Type> findAllTypes(@Param("page") Integer pageNum);
-    List<Type> findTopTypes();
-    void       saveType(@Param("name") String name);
+    List<Type> findAllTypes(@Param("page") Integer pageNum,@Param("userId")Long userId);
+    List<Type> findTopTypes(Long userId);
+    void       saveType(@Param("name") String name,@Param("userId")Long userId);
     Type        getById(@Param("id")Long id);
-    Type        getByName(@Param("name")String name);
+    Type        getByName(@Param("name")String name,@Param("userId")Long userId);
     void       deleteType(@Param("id") Long id);
     void        updateType(Type type);
 

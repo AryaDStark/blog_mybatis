@@ -1,4 +1,5 @@
 package com.yangyu.mapper;
+import com.yangyu.dto.BlogDto;
 import com.yangyu.po.Blog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,13 +13,13 @@ import java.util.List;
 @Mapper
 public interface BlogMapper {
 
-    List<Blog> findBlog(@Param("n1") Integer n1,@Param("n")int num );
+    List<Blog> findBlog(@Param("n1") Integer n1,@Param("n")int num,@Param("userId")Long userId);
 
     void save(Blog blog);
 
     void delete(@Param("id")Long id);
 
-    Blog getById(@Param("id")Long id);
+    BlogDto getById(@Param("id")Long id);
 
     void update(Blog blog);
 
@@ -28,9 +29,9 @@ public interface BlogMapper {
 
     List<Blog>  findBlogByTag(@Param("id")Long id);
 
-    Integer     count();
+    Integer     count(Long userId);
 
     List<Blog>   findHotBlog();
 
-    List<Blog>   findByKeywords(@Param("key") String keywords);
+    List<BlogDto>   findByKeywords(@Param("key") String keywords, @Param("userId")Long userId);
 }

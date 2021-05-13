@@ -40,14 +40,13 @@ public class LoginController {
     @ResponseBody
     public Result logout(HttpSession session){
         if (session.getAttribute("adminUser")!=null) {session.removeAttribute("adminUser");}
-        if (session.getAttribute("consumer")!=null){session.removeAttribute("consumer");}
         return Result.ok().data("ok","over");
     }
 
     //普通用户注册
     @PostMapping("/register")
     @ResponseBody
-    public Result register(User user){
+    public Result register(@RequestBody User user){
         User userN = new User();
         userN.setUsername(user.getUsername());
         userN.setPassword(user.getPassword());

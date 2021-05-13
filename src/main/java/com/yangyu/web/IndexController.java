@@ -36,25 +36,22 @@ public class IndexController {
     //展示 type
     @GetMapping("/types")
     @ResponseBody
-    public Result showIndexTypes()  {
-     //   System.out.println(typeService.findTopTypes());
-        return Result.ok().data("types",typeService.findTopTypes());
+    public Result showIndexTypes(Long userId)  {
+        return Result.ok().data("types",typeService.findTopTypes(userId));
     }
     @GetMapping("/tags")
     @ResponseBody
-    public Result showIndexTags()  {
-    //    System.out.println(typeService.findTopTags());
-        return Result.ok().data("tags",tagService.findTopTags());
+    public Result showIndexTags(Long userId)  {
+        return Result.ok().data("tags",tagService.findTopTags(userId));
     }
 
 
     //展示 blog
-   @GetMapping("/blogPage/{pageNumber}")
+   @GetMapping("/blogPage")
    @ResponseBody
-    public Result showBlog(@PathVariable int pageNumber){
+    public Result showBlog(int pageNumber,Long userId){
           if (pageNumber==-1){pageNumber=0;}
-//          model.addAttribute("page",blogService.findBlog(pageNumber,3));
-         return  Result.ok().data("blogs",blogService.findBlog(pageNumber,10)).data("count",blogService.count());
+         return  Result.ok().data("blogs",blogService.findBlog(pageNumber,10,userId)).data("count",blogService.count(userId));
     }
 
 
@@ -67,19 +64,5 @@ public class IndexController {
 
 
 
-    //测试----------------------------
-/*
-    @GetMapping("/")
-    public void showBlog(Model model){
 
-     System.out.println( blogService.findBlog(0,2));
-    }
-*/
-/*
-    @GetMapping("/")
-    @ResponseBody
-     public Result show(){
-        return  Result.ok().data("message","welcome").data("page","index");
-    }
-*/
 }
