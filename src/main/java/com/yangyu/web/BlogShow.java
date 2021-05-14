@@ -76,7 +76,7 @@ public class BlogShow {
     @GetMapping("/search")
     @ResponseBody
     public  Result search(@RequestParam("keywords")String keywords,@RequestParam("userId")Long userId){
-        List<BlogDto> blogDtos=blogService.findByKeywords("%"+keywords+"%",userId);
+        List<BlogDto> blogDtos=blogService.findByKeywords(keywords,userId);
         Blog blog = new Blog();
         List<Blog> blogs = new ArrayList<>();
         for (BlogDto blogDto:blogDtos){
