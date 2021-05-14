@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface BlogMapper {
 
-    List<Blog> findBlog(@Param("n1") Integer n1,@Param("n")int num,@Param("userId")Long userId);
+    List<BlogDto> findBlog(@Param("n1") Integer n1,@Param("n")int num,@Param("userId")Long userId);
 
     List<Blog> records(Long userId);
 
@@ -24,9 +24,9 @@ public interface BlogMapper {
 
     int updateType(Long typeId);
 
-    List<Blog>  findBlogByType(@Param("id") Long id);
+    List<BlogDto>  findBlogByType(@Param("id") Long id);
 
-    List<Blog>  findBlogByTag(@Param("id")Long id);
+    List<BlogDto>  findBlogByTag(@Param("id")Long id);
 
     Integer     count(Long userId);
 

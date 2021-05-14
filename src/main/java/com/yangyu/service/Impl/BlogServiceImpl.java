@@ -19,7 +19,7 @@ public class BlogServiceImpl implements BlogService {
     BlogMapper blogMapper;
 
     @Override
-    public List<Blog> findBlog(int pageNumber,int num,Long userId) {
+    public List<BlogDto> findBlog(int pageNumber,int num,Long userId) {
         int n1=pageNumber*num;
         return blogMapper.findBlog(n1,num,userId);
     }
@@ -57,12 +57,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> findBlogByType(Long id) {
+    public List<BlogDto> findBlogByType(Long id) {
         return blogMapper.findBlogByType(id);
     }
 
     @Override
-    public List<Blog> findBlogByTag(Long id) {
+    public List<BlogDto> findBlogByTag(Long id) {
         return blogMapper.findBlogByTag(id);
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface BlogService {
 
-   List<Blog> findBlog(int pageNumber,int num,Long blogId);
+   List<BlogDto> findBlog(int pageNumber,int num,Long blogId);
 
    List<Blog> records(Long userId);
 
@@ -24,9 +24,9 @@ public interface BlogService {
 
    int deleteType(Long typeId);
 
-   List<Blog>  findBlogByType(Long id);
+   List<BlogDto>  findBlogByType(Long id);
 
-   List<Blog>  findBlogByTag(Long id);
+   List<BlogDto>  findBlogByTag(Long id);
 
    Integer count(Long userId);
 

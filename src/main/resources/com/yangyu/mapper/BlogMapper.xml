@@ -29,7 +29,7 @@
                first_picture,flag,published,recommend,share_statement,title,update_time,
                views,type_id,user_id</sql>
 
-    <select id="findBlog"   resultType="Blog">
+    <select id="findBlog"   resultMap="blogMap">
         select * from t_blog where user_id=#{userId} order by views DESC limit #{n1},#{n} ;
     </select>
     <select id="records" resultMap="blogMap">
@@ -57,10 +57,10 @@
 
 <!--    index *****************************************************************-->
 
-    <select id="findBlogByType" parameterType="Long" resultType="Blog">
+    <select id="findBlogByType" parameterType="Long" resultMap="blogMap">
         select * from t_blog as blog where type_id = #{id};
     </select>
-    <select id="findBlogByTag" parameterType="Long" resultType="Blog">
+    <select id="findBlogByTag" parameterType="Long" resultMap="blogMap">
         select blog.* from t_blog blog,t_blog_tags where tags_id=#{id} and blogs_id = blog.id;
     </select>
 
