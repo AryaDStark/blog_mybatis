@@ -30,8 +30,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void save(Blog blog) {
-        blogMapper.save(blog);
+    public Long save(Blog blog) {
+        return blogMapper.save(blog);
     }
 
     @Override

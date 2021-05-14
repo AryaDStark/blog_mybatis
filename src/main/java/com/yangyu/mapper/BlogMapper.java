@@ -14,7 +14,7 @@ public interface BlogMapper {
 
     List<Blog> records(Long userId);
 
-    void save(Blog blog);
+    Long save(Blog blog);
 
     void delete(@Param("id")Long id);
 

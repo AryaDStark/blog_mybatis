@@ -35,9 +35,9 @@
     <select id="records" resultMap="blogMap">
         select * from t_blog where user_id=#{userId} order by create_time desc;
     </select>
-    <insert id="save" parameterType="com.yangyu.po.Blog"  useGeneratedKeys="true" keyColumn="id">
-        insert into t_blog (appreciation,commentabled,content,create_time,description,first_picture,flag,published,recommend,share_statement,title,type_id,user_id)
-        values (#{appreciation},#{commentabled},#{content},now(),#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},views=#{views},#{type.id},#{user.id});
+    <insert id="save" parameterType="com.yangyu.po.Blog"  useGeneratedKeys="true" keyProperty="id">
+        insert into t_blog (views,appreciation,commentabled,content,create_time,description,first_picture,flag,published,recommend,share_statement,title,type_id,user_id)
+        values (#{views},#{appreciation},#{commentabled},#{content},now(),#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},#{type.id},#{user.id});
     </insert>
     <delete id="delete" parameterType="Long">
         delete from t_blog where id=#{id};
@@ -71,7 +71,7 @@
         select * from t_blog order by views DESC limit 0,6;
     </select>
     <select id="findByKeywords"  resultMap="blogMap">
-        select <include refid="sql"/> from t_blog where title like concat('%',#{key},'%')  or content likeconcat('%',#{key},'%')  or description like concat('%',#{key},'%')  and user_id=#{userId};
+        select <include refid="sql"/> from t_blog where title like concat('%',#{key},'%')  or content like concat('%',#{key},'%')  or description like concat('%',#{key},'%')  and user_id=#{userId};
     </select>
 
     <select id="findAllByKeywords"  resultMap="blogMap">

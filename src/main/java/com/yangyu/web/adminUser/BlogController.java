@@ -32,7 +32,7 @@ public class BlogController {
 
 
     //增加
-    @GetMapping("/addBlog")
+    @PostMapping("/addBlog")
     @ResponseBody
     public Result addBlog(@RequestBody BlogDto blogDto){
         Blog blog = new Blog();
@@ -49,7 +49,6 @@ public class BlogController {
         blog.setViews(0);
         blog.setType(typeService.getById(blogDto.getTypeId()));
         blog.setUser(userService.getById(blogDto.getUserId()));
-        blogService.save(blog);
         for (Long tagId:blogDto.getTagIds()){
             blogTagService.addBlogTag(blog.getId(),tagId);
         }

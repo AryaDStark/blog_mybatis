@@ -14,7 +14,7 @@ public interface BlogService {
 
    List<Blog> records(Long userId);
 
-   void save(Blog blog);
+   Long save(Blog blog);
 
    void delete(Long id);
 
