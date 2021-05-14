@@ -49,6 +49,7 @@ public class BlogController {
         blog.setViews(0);
         blog.setType(typeService.getById(blogDto.getTypeId()));
         blog.setUser(userService.getById(blogDto.getUserId()));
+        blogService.save(blog);
         for (Long tagId:blogDto.getTagIds()){
             blogTagService.addBlogTag(blog.getId(),tagId);
         }
