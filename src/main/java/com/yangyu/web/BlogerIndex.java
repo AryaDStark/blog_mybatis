@@ -44,7 +44,7 @@ public class BlogerIndex {
     //展示 blog
    @GetMapping("/blogPage")
    @ResponseBody
-    public Result showBlog(int pageNumber,Long userId){
+    public Result showBlog(@RequestParam int pageNumber,@RequestParam Long userId){
           if (pageNumber==-1){pageNumber=0;}
          return  Result.ok().data("blogs",blogService.findBlog(pageNumber,10,userId)).data("count",blogService.count(userId));
     }
