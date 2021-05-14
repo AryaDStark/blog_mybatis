@@ -36,16 +36,16 @@ public class BlogController {
     @ResponseBody
     public Result addBlog(@RequestBody BlogDto blogDto){
         Blog blog = new Blog();
-        blog.setAppreciation(blog.isAppreciation());
-        blog.setCommentabled(blog.isCommentabled());
-        blog.setContent(blog.getContent());
-        blog.setDescription(blog.getDescription());
-        blog.setFirstPicture(blog.getFirstPicture());
-        blog.setFlag(blog.getFlag());
-        blog.setPublished(blog.isPublished());
-        blog.setRecommend(blog.isRecommend());
-        blog.setShareStatement(blog.isShareStatement());
-        blog.setTitle(blog.getTitle());
+        blog.setAppreciation(blogDto.isAppreciation());
+        blog.setCommentabled(blogDto.isCommentabled());
+        blog.setContent(blogDto.getContent());
+        blog.setDescription(blogDto.getDescription());
+        blog.setFirstPicture(blogDto.getFirstPicture());
+        blog.setFlag(blogDto.getFlag());
+        blog.setPublished(blogDto.isPublished());
+        blog.setRecommend(blogDto.isRecommend());
+        blog.setShareStatement(blogDto.isShareStatement());
+        blog.setTitle(blogDto.getTitle());
         blog.setViews(0);
         blog.setType(typeService.getById(blogDto.getTypeId()));
         blog.setUser(userService.getById(blogDto.getUserId()));
