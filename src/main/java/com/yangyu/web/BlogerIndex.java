@@ -55,9 +55,9 @@ public class BlogerIndex {
     public Result showBlog(@RequestParam int pageNumber,@RequestParam Long userId){
           if (pageNumber==-1){pageNumber=0;}
        List<BlogDto> blogDtos=blogService.findBlog(pageNumber,10,userId);
-       Blog blog = new Blog();
        List<Blog> blogs = new ArrayList<>();
        for (BlogDto blogDto:blogDtos){
+           Blog blog = new Blog();
            blog.setId(blogDto.getId());
            blog.setTitle(blogDto.getTitle());
            blog.setContent(blogDto.getContent());
@@ -73,7 +73,7 @@ public class BlogerIndex {
            blog.setCreateTime(blogDto.getCreateTime());
            blog.setUpdateTime(blogDto.getUpdateTime());
            blog.setType(typeService.getById(blogDto.getTypeId()));
-           blog.setTagIds(blogTagService.findTagByBlog(blogDto.getId())+"");
+           blog.setTags(blogTagService.findTagByBlog(blogDto.getId()));
            blogs.add(blog);
        }
          return  Result.ok().data("blogs",blogs).data("count",blogService.count(userId));

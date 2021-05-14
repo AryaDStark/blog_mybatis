@@ -77,9 +77,9 @@ public class BlogShow {
     @ResponseBody
     public  Result search(@RequestParam("keywords")String keywords,@RequestParam("userId")Long userId){
         List<BlogDto> blogDtos=blogService.findByKeywords(keywords,userId);
-        Blog blog = new Blog();
         List<Blog> blogs = new ArrayList<>();
         for (BlogDto blogDto:blogDtos){
+            Blog blog = new Blog();
             blog.setId(blogDto.getId());
             blog.setTitle(blogDto.getTitle());
             blog.setContent(blogDto.getContent());
@@ -95,7 +95,7 @@ public class BlogShow {
             blog.setCreateTime(blogDto.getCreateTime());
             blog.setUpdateTime(blogDto.getUpdateTime());
             blog.setType(typeService.getById(blogDto.getTypeId()));
-            blog.setTagIds(blogTagService.findTagByBlog(blogDto.getId())+"");
+            blog.setTags(blogTagService.findTagByBlog(blogDto.getId()));
             blogs.add(blog);
         }
         if (null!=blogs){  return Result.ok().data("blogsFoundByKeywords",blogs);}

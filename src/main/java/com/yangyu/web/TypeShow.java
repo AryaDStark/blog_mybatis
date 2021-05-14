@@ -38,9 +38,9 @@ public class TypeShow {
     public Result findBlogsByType(@PathVariable Long typeId){
         if (typeId==-1){return Result.ok().data("0","未给id");}
         List<BlogDto> blogDtos=blogService.findBlogByType(typeId);
-        Blog blog = new Blog();
         List<Blog> blogs = new ArrayList<>();
         for (BlogDto blogDto:blogDtos){
+            Blog blog = new Blog();
             blog.setId(blogDto.getId());
             blog.setTitle(blogDto.getTitle());
             blog.setContent(blogDto.getContent());
@@ -56,7 +56,7 @@ public class TypeShow {
             blog.setCreateTime(blogDto.getCreateTime());
             blog.setUpdateTime(blogDto.getUpdateTime());
             blog.setType(typeService.getById(blogDto.getTypeId()));
-            blog.setTagIds(blogTagService.findTagByBlog(blogDto.getId())+"");
+            blog.setTags(blogTagService.findTagByBlog(blogDto.getId()));
             blogs.add(blog);
         }
         return Result.ok().data("blogs",blogs);
