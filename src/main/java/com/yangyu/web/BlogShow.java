@@ -62,6 +62,13 @@ public class BlogShow {
     }
 
 
+    @GetMapping("/records")
+    @ResponseBody
+    public Result records(Long userId){
+        return Result.ok().data("blogs",blogService.records(userId));
+    }
+
+
     /**
      * 根据或title 或content 或 description 中 关键字 查找博客
      *

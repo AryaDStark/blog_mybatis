@@ -13,7 +13,7 @@
     </select>
 
     <select id="getByName" resultType="User">
-        select id,nickname,avatar from t_user where nickname like '%'#{keywords}'%';
+        select id,nickname,avatar from t_user where nickname like concat('%',#{keywords},'%') ;
     </select>
 
     <select id="checkUser"  resultType="User">

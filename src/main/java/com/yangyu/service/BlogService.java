@@ -12,6 +12,8 @@ public interface BlogService {
 
    List<Blog> findBlog(int pageNumber,int num,Long blogId);
 
+   List<Blog> records(Long userId);
+
    void save(Blog blog);
 
    void delete(Long id);

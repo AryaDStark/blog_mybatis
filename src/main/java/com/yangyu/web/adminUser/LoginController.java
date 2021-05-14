@@ -30,9 +30,9 @@ public class LoginController {
         User user = userService.checkUser(username,password);
         if (user!=null){
             session.setAttribute("adminUser",user);
-            return Result.ok().data("ok",0).data("管理员对象信息",user);
+            return Result.ok().data("ok",0).data("user",user);
         } else {
-                  return Result.error().data("账号密码错误","请确认");
+                  return Result.error().data("wrong","请确认");
               }
     }
 

@@ -11,7 +11,7 @@ spring:
 mybatis:
   type-aliases-package: com.yangyu.po
   mapper-locations: classpath:com/yangyu/mapper/*Mapper.xml
-  config
+
 
   #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   #    database-platform: com.yangyu.util.MySQL5InnoDBDialectUtf8mb4

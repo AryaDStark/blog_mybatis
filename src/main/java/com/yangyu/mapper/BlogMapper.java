@@ -4,16 +4,15 @@ import com.yangyu.po.Blog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.PathVariable;
 
-//import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 @Component
 @Mapper
 public interface BlogMapper {
 
     List<Blog> findBlog(@Param("n1") Integer n1,@Param("n")int num,@Param("userId")Long userId);
+
+    List<Blog> records(Long userId);
 
     void save(Blog blog);
 
