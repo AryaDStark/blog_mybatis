@@ -62,10 +62,13 @@ public class TypeController {
     //提交修改后的 type
     @GetMapping("/updateType")
     @ResponseBody
-    public Result updateType(@RequestBody Type type, HttpSession session){
+    public Result updateType(@RequestParam String name,@RequestParam Long id, HttpSession session){
         User user = (User)session.getAttribute("adminUser");
         Long userId = user.getId();
-         if (typeService.getByName(type.getName(),userId)==null){
+         if (typeService.getByName(name,userId)==null){
+             Type type = new Type();
+             type.setId(id);
+             type.setName(name);
              typeService.updateType(type);
              return Result.ok().data("message","over");
          }

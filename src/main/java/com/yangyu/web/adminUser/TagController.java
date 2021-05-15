@@ -60,10 +60,13 @@ public class TagController {
     //提交修改后的 tag
     @GetMapping("/updateTag")
     @ResponseBody
-    public Result updateTag(@RequestBody Tag tag, HttpSession session){
+    public Result updateTag(@RequestParam String name,@RequestParam Long id, HttpSession session){
         User user = (User)session.getAttribute("adminUser");
         Long userId = user.getId();
-        if (tagService.getByName(tag.getName(),userId)==null){
+        if (tagService.getByName(name,userId)==null){
+            Tag tag = new Tag();
+            tag.setId(id);
+            tag.setName(name);
             tagService.updateTag(tag);
             return Result.ok().data("message","over");
         }
