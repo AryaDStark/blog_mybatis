@@ -25,12 +25,11 @@ public class TypeShow {
     @Autowired
     BlogTagService blogTagService;
 
-    @GetMapping("/allTypes")
+    @GetMapping("/types")
     @ResponseBody
     public Result type(Long userId){
-        return Result.ok().data("types",typeService.findTopTypes(userId));
+        return Result.ok().data("types",typeService.findAllTypes(userId));
     }
-
 
     //根据 type展示博客
     @GetMapping("/allTypes/{typeId}")

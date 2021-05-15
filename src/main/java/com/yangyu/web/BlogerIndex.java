@@ -36,13 +36,12 @@ public class BlogerIndex {
     BlogTagService blogTagService;
 
     //展示 type
-    @GetMapping("/types")
+    @GetMapping("/allTypes")
     @ResponseBody
     public Result showIndexTypes(Long userId)  {
-
         return Result.ok().data("types",typeService.findTopTypes(userId));
     }
-    @GetMapping("/tags")
+    @GetMapping("/allTags")
     @ResponseBody
     public Result showIndexTags(Long userId)  {
         return Result.ok().data("tags",tagService.findTopTags(userId));

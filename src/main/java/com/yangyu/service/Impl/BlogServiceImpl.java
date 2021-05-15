@@ -72,6 +72,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Integer countSearch(String keyword) {
+        return blogMapper.countSearch(keyword);
+    }
+
+    @Override
     public List<Blog> findHotBlog() {
         return blogMapper.findHotBlog();
     }

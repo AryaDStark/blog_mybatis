@@ -67,6 +67,9 @@
     <select id="count"  resultType="Integer">
         select count(*) from t_blog where user_id=#{userId};
     </select>
+    <select id="countSearch" resultType="Integer">
+        select count(*) from t_blog where title like concat('%',#{key},'%') or  description like concat('%',#{key},'%');
+    </select>
     <select id="findHotBlog" resultType="Blog">
         select * from t_blog order by views DESC limit 0,6;
     </select>

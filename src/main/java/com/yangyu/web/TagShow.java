@@ -29,10 +29,10 @@ public class TagShow {
     @Autowired
     BlogTagService blogTagService;
 
-    @GetMapping("/allTags")
+    @GetMapping("/tags")
     @ResponseBody
     public Result tag(Long userId){
-        return Result.ok().data("tags",tagService.findTopTags(userId));
+        return Result.ok().data("tags",tagService.findAllTags(userId));
     }
 
     //根据 tag 展示 博客

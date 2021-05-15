@@ -30,6 +30,8 @@ public interface BlogMapper {
 
     Integer     count(Long userId);
 
+    Integer countSearch(String keyword);
+
     List<Blog>   findHotBlog();
 
     List<BlogDto>   findByKeywords(@Param("key") String keywords, @Param("userId")Long userId);

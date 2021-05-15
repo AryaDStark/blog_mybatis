@@ -30,6 +30,8 @@ public interface BlogService {
 
    Integer count(Long userId);
 
+   Integer countSearch(String keyword);
+
     List<Blog>           findHotBlog();
 
    List<BlogDto>   findByKeywords(String keywords, Long userId);

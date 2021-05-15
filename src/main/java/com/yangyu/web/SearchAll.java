@@ -22,6 +22,8 @@ public class SearchAll {
     @GetMapping("/searchAll")
     public Result search(@RequestParam String keyword,@RequestParam int pageNum){
 
-        return Result.ok().data("blogs", blogService.findAllByKeywords(keyword,pageNum)).data("users",userService.getByName(keyword));
+        return Result.ok().data("blogs", blogService.findAllByKeywords(keyword,pageNum))
+                .data("total",blogService.countSearch(keyword))
+                .data("users",userService.getByName(keyword));
     }
 }
