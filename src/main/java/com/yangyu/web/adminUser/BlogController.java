@@ -49,8 +49,10 @@ public class BlogController {
         blog.setViews(0);
         blog.setType(typeService.getById(blogDto.getTypeId()));
         blog.setUser(userService.getById(blogDto.getUserId()));
+        blogService.save(blog);
+        Long blogId = blog.getId();
         for (Long tagId:blogDto.getTagIds()){
-            blogTagService.addBlogTag(blog.getId(),tagId);
+            blogTagService.addBlogTag(blogId,tagId);
         }
         return  Result.ok().data("message","成功");
     }
@@ -91,7 +93,7 @@ public class BlogController {
     }
 
     //提交修改后的 blog
-    @GetMapping("/updateBlog")
+    @PostMapping("/updateBlog")
     @ResponseBody
     public Result updateTag(@RequestBody BlogDto blogDto){
         Blog blog = new Blog();
