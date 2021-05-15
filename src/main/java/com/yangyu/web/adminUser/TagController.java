@@ -23,11 +23,10 @@ public class TagController {
 
     @GetMapping("/tagControl")
     @ResponseBody
-    public Result showAllTags(int pageNum,HttpSession session){
+    public Result showAllTags(HttpSession session){
         User user = (User)session.getAttribute("adminUser");
         Long userId = user.getId();
-        if (pageNum==-1){pageNum=0;}
-        return Result.ok().data("tags",tagService.findAllTags(pageNum,userId));
+        return Result.ok().data("tags",tagService.findAllTags(userId));
     }
 
     //增加

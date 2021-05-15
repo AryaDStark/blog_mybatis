@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface TypeMapper {
 
-    List<Type> findAllTypes(@Param("page") Integer pageNum,@Param("userId")Long userId);
+    List<Type> findAllTypes(Long userId);
     List<Type> findTopTypes(Long userId);
     void       saveType(@Param("name") String name,@Param("userId")Long userId);
     Type        getById(@Param("id")Long id);

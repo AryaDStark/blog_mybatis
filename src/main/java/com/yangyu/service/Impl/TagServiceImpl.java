@@ -20,9 +20,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> findAllTags(int pageNum,Long userId) {
-        int n1=pageNum*3+1;
-        return tagMapper.findAllTags(n1,userId);
+    public List<Tag> findAllTags(Long userId) {
+        return tagMapper.findAllTags(userId);
     }
 
     @Override

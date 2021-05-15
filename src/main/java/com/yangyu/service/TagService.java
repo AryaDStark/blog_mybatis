@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TagService {
     List<Tag> findTopTags(Long userId);
-    List<Tag> findAllTags(int pageNum,Long userId);
+    List<Tag> findAllTags(Long userId);
     void      saveTag(String name,Long userId);
     void      deleteTag(Long id);
     Tag       getById(Long id);

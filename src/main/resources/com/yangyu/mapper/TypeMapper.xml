@@ -5,7 +5,7 @@
 <mapper namespace="com.yangyu.mapper.TypeMapper">
 <!--    分页查询-->
     <select id="findAllTypes" resultType="Type">
-        select * from t_type where user_id=#{userId} limit #{page},3;
+        select * from t_type where user_id=#{userId};
     </select>
 <!--     按blog数量排序-->
     <select id="findTopTypes" resultType="Type">

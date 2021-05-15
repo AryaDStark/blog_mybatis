@@ -19,9 +19,8 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public List<Type> findAllTypes(int pageNum,Long userId) {
-        int n1=pageNum*3+1;
-        return typeMapper.findAllTypes(n1,userId);
+    public List<Type> findAllTypes(Long userId) {
+        return typeMapper.findAllTypes(userId);
     }
 
     @Override

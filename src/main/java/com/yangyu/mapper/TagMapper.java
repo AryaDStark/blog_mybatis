@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public interface TagMapper {
 
-    List<Tag> findAllTags(@Param("n")Integer pageNum,@Param("userId")Long userId);
+    List<Tag> findAllTags(Long userId);
     List<Tag> findTopTags(Long userId);
     void      saveTag(@Param("name")String name,@Param("userId")Long userId);
     void      deleteTag(@Param("id")Long id);

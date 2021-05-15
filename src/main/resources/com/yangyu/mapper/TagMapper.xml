@@ -7,7 +7,7 @@
         select tag.* from t_tag tag join t_blog_tags tbt on tag.id = tbt.tags_id where tag.user_id=#{userId} group by tag.id order by count(*) desc limit 0,10 ;
     </select>
     <select id="findAllTags" resultType="Tag">
-        select * from t_tag where user_id=#{userId} limit #{n},3
+        select * from t_tag where user_id=#{userId};
     </select>
     <insert id="saveTag"  useGeneratedKeys="true" keyColumn="id">
          insert into t_tag(name,user_id) values (#{name},#{userId});

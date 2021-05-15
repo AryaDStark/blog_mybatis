@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TypeService {
 
-    List<Type> findAllTypes(int pageNum,Long userId);
+    List<Type> findAllTypes(Long userId);
 
     List<Type> findTopTypes(Long userId);
 
