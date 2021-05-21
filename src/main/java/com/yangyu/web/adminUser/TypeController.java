@@ -37,8 +37,12 @@ public class TypeController {
     public Result addType(String name, HttpSession session){
         User user = (User)session.getAttribute("adminUser");
         Long userId = user.getId();
-        typeService.saveType(name,userId);
-        return  Result.ok().data("message","成功");
+        if (typeService.getByName(name,userId)==null) {
+            typeService.saveType(name, userId);
+            return Result.ok().data("message", "成功");
+        }else {
+            return Result.error().data("msg","名字重复");
+        }
     }
 
     //删除

@@ -23,6 +23,11 @@ public class BlogTagServiceImpl implements BlogTagService {
     }
 
     @Override
+    public int count(Long id) {
+        return blogTagMapper.count(id);
+    }
+
+    @Override
     public int addBlogTag(Long blogId, Long tagId) {
         return blogTagMapper.addBlogTag(blogId,tagId);
     }

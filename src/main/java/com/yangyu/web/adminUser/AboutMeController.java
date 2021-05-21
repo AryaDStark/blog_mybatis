@@ -34,6 +34,7 @@ public class AboutMeController {
         userN.setEmail(userDto.getEmail());
         userN.setNickname(userDto.getNickname());
         userN.setAvatar(userDto.getAvatar());
+        userN.setContent(userDto.getContent());
         if (userService.updateUser(userN)>0){
             return Result.ok().data("ok","ok");
         }else {

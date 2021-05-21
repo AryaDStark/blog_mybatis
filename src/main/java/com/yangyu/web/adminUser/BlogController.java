@@ -62,13 +62,13 @@ public class BlogController {
     @ResponseBody
     public Result deleteTag(@PathVariable Long id){
         blogService.delete(id);
-        if (blogTagService.deleteBlogTag(id)>0)
+        if (blogTagService.deleteBlogTag(id)>0 || blogTagService.count(id)<1)
         return  Result.ok().data("message","成功");
         else return Result.error().data("blogTag关系","删除失败");
     }
 
     //填充 未作修改 的页面
-    @GetMapping("/updateBlog/{id}")
+    @PostMapping("/updateBlog/{id}")
     @ResponseBody
     public Result showThisBlog(@PathVariable Long id){
         Blog blog = new Blog();

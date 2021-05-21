@@ -30,6 +30,17 @@ public class User {
     private Date updateTime;
     //博客
     private List<Blog> blogs = new ArrayList<>();
+
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public User() {
     }
 
@@ -125,6 +136,8 @@ public class User {
                 ", avatar='" + avatar + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", blogs=" + blogs +
+                ", content='" + content + '\'' +
                 '}';
     }
 }

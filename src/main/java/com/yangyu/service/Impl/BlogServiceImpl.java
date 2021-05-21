@@ -25,6 +25,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public List<BlogDto> findBlogP(int pageNumber, int num, Long userId) {
+        return blogMapper.findBlogP(pageNumber,num,userId);
+    }
+
+    @Override
     public List<Blog> records(Long userId) {
         return blogMapper.records(userId);
     }

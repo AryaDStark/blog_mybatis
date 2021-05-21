@@ -32,12 +32,15 @@
     <select id="findBlog"   resultMap="blogMap">
         select * from t_blog where user_id=#{userId} order by views DESC limit #{n1},#{n} ;
     </select>
+    <select id="findBlogP"   resultMap="blogMap">
+        select * from t_blog where user_id=#{userId} and published=1 order by views DESC limit #{n1},#{n} ;
+    </select>
     <select id="records" resultMap="blogMap">
-        select * from t_blog where user_id=#{userId} order by create_time desc;
+        select * from t_blog where user_id=#{userId} and published=1  order by create_time desc;
     </select>
     <insert id="save" parameterType="com.yangyu.po.Blog"  useGeneratedKeys="true" keyProperty="id">
-        insert into t_blog (views,appreciation,commentabled,content,create_time,description,first_picture,flag,published,recommend,share_statement,title,type_id,user_id)
-        values (#{views},#{appreciation},#{commentabled},#{content},now(),#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},#{type.id},#{user.id});
+        insert into t_blog (views,appreciation,commentabled,content,create_time,description,first_picture,flag,published,recommend,share_statement,title,type_id,user_id,update_time)
+        values (#{views},#{appreciation},#{commentabled},#{content},now(),#{description},#{firstPicture},#{flag},#{published},#{recommend},#{shareStatement},#{title},#{type.id},#{user.id},now());
     </insert>
     <delete id="delete" parameterType="Long">
         delete from t_blog where id=#{id};
@@ -58,27 +61,27 @@
 <!--    index *****************************************************************-->
 
     <select id="findBlogByType" parameterType="Long" resultMap="blogMap">
-        select * from t_blog as blog where type_id = #{id};
+        select * from t_blog as blog where type_id = #{id} and published=1;
     </select>
     <select id="findBlogByTag" parameterType="Long" resultMap="blogMap">
-        select blog.* from t_blog blog,t_blog_tags where tags_id=#{id} and blogs_id = blog.id;
+        select blog.* from t_blog blog,t_blog_tags where tags_id=#{id} and blogs_id = blog.id and blog.published=1;
     </select>
 
     <select id="count"  resultType="Integer">
-        select count(*) from t_blog where user_id=#{userId};
+        select count(*) from t_blog where user_id=#{userId} and published=1;
     </select>
     <select id="countSearch" resultType="Integer">
-        select count(*) from t_blog where title like concat('%',#{key},'%') or  description like concat('%',#{key},'%');
+        select count(*) from t_blog where (title like concat('%',#{key},'%') or  description like concat('%',#{key},'%')) and published=1;
     </select>
     <select id="findHotBlog" resultType="Blog">
-        select * from t_blog order by views DESC limit 0,6;
+        select * from t_blog where published=1 order by views DESC limit 0,6;
     </select>
     <select id="findByKeywords"  resultMap="blogMap">
-        select <include refid="sql"/> from t_blog where title like concat('%',#{key},'%')  or content like concat('%',#{key},'%')  or description like concat('%',#{key},'%')  and user_id=#{userId};
+        select <include refid="sql"/> from t_blog where (title like concat('%',#{key},'%')  or content like concat('%',#{key},'%')  or description like concat('%',#{key},'%') ) and user_id=#{userId} and published=1;
     </select>
 
     <select id="findAllByKeywords"  resultMap="blogMap">
-        select <include refid="sql"/> from t_blog where title like concat('%',#{key},'%') or  description like concat('%',#{key},'%') limit #{pageNum},10;
+        select <include refid="sql"/> from t_blog where (title like concat('%',#{key},'%') or  description like concat('%',#{key},'%')) and published=1 limit #{pageNum},10;
     </select>
 
 

@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface BlogService {
 
-   List<BlogDto> findBlog(int pageNumber,int num,Long blogId);
+   List<BlogDto> findBlog(int pageNumber,int num,Long userId);
+
+   List<BlogDto> findBlogP(int pageNumber,int num,Long userId);
 
    List<Blog> records(Long userId);
 

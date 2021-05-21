@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface BlogTagService {
     List<Tag> findTagByBlog(Long blogId);
+    int count(Long id);
     int addBlogTag(Long blogId,Long tagId);
     int updateTag(Long tagId);
     int deleteBlogTag(Long id);

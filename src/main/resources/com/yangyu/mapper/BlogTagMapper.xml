@@ -8,6 +8,10 @@
         select t.id,t.name from t_blog_tags tbt left join t_tag t on tbt.tags_id=t.id  where tbt.blogs_id=#{blogId};
     </select>
 
+    <select id="count" resultType="Integer">
+        select count(*) from t_blog_tags where blogs_id=#{id};
+    </select>
+
     <insert id="addBlogTag">
         insert into t_blog_tags (blogs_id,tags_id) values (#{blogId},#{tagId});
     </insert>

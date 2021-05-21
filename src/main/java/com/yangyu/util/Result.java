@@ -27,8 +27,6 @@ public class Result {
         return result;
     }
 
-
-
     //失败静态方法
     public static Result error(){
         Result result=new Result();

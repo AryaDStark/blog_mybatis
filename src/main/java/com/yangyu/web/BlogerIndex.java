@@ -53,7 +53,7 @@ public class BlogerIndex {
    @ResponseBody
     public Result showBlog(@RequestParam int pageNumber,@RequestParam Long userId){
           if (pageNumber==-1){pageNumber=0;}
-       List<BlogDto> blogDtos=blogService.findBlog(pageNumber,10,userId);
+       List<BlogDto> blogDtos=blogService.findBlogP(pageNumber,10,userId);
        List<Blog> blogs = new ArrayList<>();
        for (BlogDto blogDto:blogDtos){
            Blog blog = new Blog();

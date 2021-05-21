@@ -9,6 +9,15 @@ public class UserDto {
     private String email;
     private String nickname;
     private String avatar;
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getAvatar() {
         return avatar;

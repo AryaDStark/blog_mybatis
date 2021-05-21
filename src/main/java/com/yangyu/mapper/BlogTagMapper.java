@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper
 public interface BlogTagMapper {
     List<Tag> findByBlogId(Long blogId);
+    int count(Long id);
     int addBlogTag(@Param("blogId")Long blogId,@Param("tagId")Long tagId);
     int updateTag(Long tagId);
     int deleteBlogTag(Long id);

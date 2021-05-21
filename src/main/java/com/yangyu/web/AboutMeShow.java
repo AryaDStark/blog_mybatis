@@ -1,5 +1,6 @@
 package com.yangyu.web;
 
+import com.yangyu.po.User;
 import com.yangyu.service.UserService;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class AboutMeShow {
 
     @GetMapping("/seeAboutMe/{id}")
     public Result sam(@PathVariable Long id){
-        return Result.ok().data("user",userService.getById(id));
+        User user = userService.getById(id);
+        user.setPassword("");
+        user.setUsername("");
+        return Result.ok().data("user",user);
     }
 }

@@ -35,8 +35,10 @@ public class TagController {
     public Result addTag(String name, HttpSession session){
         User user = (User)session.getAttribute("adminUser");
         Long userId = user.getId();
-        tagService.saveTag(name,userId);
-        return  Result.ok().data("message","成功");
+        if (tagService.getByName(name,userId)==null) {
+            tagService.saveTag(name, userId);
+            return Result.ok().data("message", "成功");
+        }else return Result.error().data("msg","名字重复");
     }
 
     //删除

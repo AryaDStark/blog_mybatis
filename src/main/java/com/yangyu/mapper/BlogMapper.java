@@ -12,6 +12,9 @@ public interface BlogMapper {
 
     List<BlogDto> findBlog(@Param("n1") Integer n1,@Param("n")int num,@Param("userId")Long userId);
 
+    List<BlogDto> findBlogP(@Param("n1") Integer n1,@Param("n")int num,@Param("userId")Long userId);
+
+
     List<Blog> records(Long userId);
 
     Long save(Blog blog);
