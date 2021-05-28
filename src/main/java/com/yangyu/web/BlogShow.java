@@ -142,6 +142,7 @@ public class BlogShow {
             comment.setAvatar(user.getAvatar());
             comment.setNickname(user.getNickname());
             comment.setEmail(user.getEmail());
+            comment.setUserId(user.getId());
             commentService.save(comment);
             return Result.ok().data("message","管理员评论 来点档次");
         }

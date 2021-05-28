@@ -26,5 +26,6 @@ public interface CommentService {
 
     void   save(Comment comment);
 
+    int updateAvatar(String avatar,Long userId);
 
 }

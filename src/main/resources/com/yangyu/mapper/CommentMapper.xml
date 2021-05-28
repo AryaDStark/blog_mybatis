@@ -16,8 +16,20 @@
         <result property="blogId" column="BLOG_ID" />
         <result property="adminComment" column="ADMINCOMMENT" />
         <result property="parentCommentId" column="PARENT_COMMENT_ID" />
+        <result property="userId" column="USER_ID"/>
+    </resultMap>
 
+    <resultMap type="com.yangyu.po.Comment" id="commentMapT">
 
+        <id property="id" column="id" />
+
+        <!-- 定义普通属性 -->
+        <result property="nickname" column="NICKNAME" />
+        <result property="email" column="EMAIL" />
+        <result property="content" column="CONTENT" />
+        <result property="avatar" column="AVATAR" />
+        <result property="adminComment" column="ADMINCOMMENT" />
+        <result property="userId" column="USER_ID"/>
     </resultMap>
 
 
@@ -27,16 +39,19 @@
     <select id="findById" resultType="Comment">
         select * from t_comment where id=#{id};
     </select>
-    <select id="findNoParentComment" parameterType="Long" resultType="Comment">
+    <select id="findNoParentComment" parameterType="Long" resultMap="commentMapT">
         select * from t_comment where blog_id=#{id} and parent_comment_id=0;
     </select>
 
 
     <insert id="save" parameterType="com.yangyu.po.Comment" useGeneratedKeys="true" keyColumn="id">
-        insert into t_comment(admin_comment,avatar,content,email,nickname,blog_id,parent_comment_id)
-        values(#{adminComment},#{avatar},#{content},#{email},#{nickname},#{blog.id},#{parentComment.id});
+        insert into t_comment(admin_comment,avatar,content,email,nickname,blog_id,parent_comment_id,user_id)
+        values(#{adminComment},#{avatar},#{content},#{email},#{nickname},#{blog.id},#{parentComment.id},#{userId});
     </insert>
 
+    <update id="updateAvatar">
+        update t_comment set avatar=#{avatar} where user_id=#{userId};
+    </update>
 
 
 

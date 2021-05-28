@@ -71,4 +71,9 @@ public class CommentServiceImpl implements CommentService {
        }
        return replies;
     }
+
+    @Override
+    public int updateAvatar(String avatar, Long userId) {
+        return commentMapper.updateAvatar(avatar,userId);
+    }
 }

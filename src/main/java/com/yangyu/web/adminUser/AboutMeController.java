@@ -2,6 +2,7 @@ package com.yangyu.web.adminUser;
 
 import com.yangyu.dto.UserDto;
 import com.yangyu.po.User;
+import com.yangyu.service.CommentService;
 import com.yangyu.service.UserService;
 import com.yangyu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class AboutMeController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("/aboutMe")
     public Result aboutMe(HttpSession session){
@@ -30,14 +33,18 @@ public class AboutMeController {
         Long userId = user.getId();
         User userN = new User();
         userN.setId(userId);
-        userN.setPassword(userDto.getPassword());
+        if (userDto.getPassword()==""||userDto.getPassword().equals("")) userN.setPassword(user.getPassword());
+        else userN.setPassword(userDto.getPassword());
         userN.setEmail(userDto.getEmail());
         userN.setNickname(userDto.getNickname());
         userN.setAvatar(userDto.getAvatar());
         userN.setContent(userDto.getContent());
-        if (userService.updateUser(userN)>0){
+        if (userService.updateUser(userN)>0&&commentService.updateAvatar(userDto.getAvatar(),userId)>0){
+            session.removeAttribute("adminUser");
+            session.setAttribute("adminUser",userN);
             return Result.ok().data("ok","ok");
-        }else {
+        }
+        else {
             return Result.error();
         }
 

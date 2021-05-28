@@ -44,4 +44,11 @@ public interface CommentMapper {
      * */
     void   save(Comment comment);
 
+    /**
+     * 更新头像
+     *
+     * @param
+     * */
+    int updateAvatar(@Param("avatar") String avatar,@Param("userId") Long userId);
+
 }
